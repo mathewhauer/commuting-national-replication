@@ -100,7 +100,6 @@ MHHW <- cleandat(do.call(rbind.data.frame, d))
 parallelStop()
 
 MHHW2 <- MHHW %>%
-  # filter(metadata.id == mylist2) %>%
   dplyr::select(metadata.id:data.v)
 head(MHHW2)
 

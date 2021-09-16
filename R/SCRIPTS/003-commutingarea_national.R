@@ -32,6 +32,7 @@ targets<- read.csv("./R/DATA-RAW/countylist.csv") %>%
 coastal_counties <- counties( year = 2019, cb = TRUE) %>%
   filter(GEOID %in% targets$GEOID) %>%
   left_join(fipslist, by = "GEOID")
+coastal_counties$state <- tolower(coastal_counties$state)
 
 # Setting up the sequencing for downloading the LEHD-LODES data.
 states <- c(sort(unique(coastal_counties$state)),rep(2002:2017))
@@ -59,7 +60,7 @@ downloadODdata <- function(i){
 
 # actually running the function above.
 parallelStartSocket(detectCores() - 1)
-parallelMap(downloadODdata, states)
+parallelMap(downloadODdata, states[1])
 parallelStop()
 
 # With the data downloaded, we still need to format it. This code chunk will actually transform the data.  

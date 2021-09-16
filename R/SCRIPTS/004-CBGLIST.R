@@ -1,4 +1,5 @@
-### The data is very large and must be chunked out for processing. This will generate a unique list of CBG pairs.
+### The data is very large and must be chunked out for processing. 
+### This will generate a unique list of CBG pairs.
 
 source("./R/SCRIPTS/000-Libraries.R")
 
@@ -48,9 +49,9 @@ for(i in 2002:2017){
 commutingareas <- read_csv("./R/DATA-PROCESSED/ALL-COMMUTINGAREAS-1percent.csv") %>%
   mutate(h_state = substr(h_county,1,2))
 
+
+#### The following file is generated from the CommuterFlows.R script.
 cbgpairs <- fread("./R/DATA-PROCESSED/ALLCOMMUTERS.csv.gz", fill = TRUE, sep = ",", integer64 = "character"
-                  # ,
-                  # select=c(2,3)
 )
 cbgpairs$h_county = substr(cbgpairs$h_blkgrp,1,5)
 cbgpairs$w_county = substr(cbgpairs$w_blkgrp,1,5)
